@@ -1,0 +1,11 @@
+{
+  "FileNotExist": "File does NOT exist: '{0}'.",
+  "UriFormatNotCorrect": "The URI format is not correct: '{0}'.",
+  "Exception": "Exception: {0}",
+  "SecurityException": "You don't have sufficient permissions to access the location of the XML data: '{0}'.",
+  "FileEmpty": "File: {0} is EMPTY!",
+  "NotValidXml": "File is NOT valid XML!",
+  "Success": "Success: '{0}'!",
+  "IOException": "IO file exception: '{0}'.",
+  "NoTagInXml": "NO '{0}' tag (root child) in XML file."
+}

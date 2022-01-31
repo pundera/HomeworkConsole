@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "HomeworkConsole": {
+      "commandName": "Project",
+      "commandLineArgs": "\"c:\\TestData\\source.xml\" \"c:\\TestData\\target.json\""
+    }
+  }
+}
