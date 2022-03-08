@@ -27,37 +27,39 @@ namespace HomeworkConsole
         {
             Console.OutputEncoding = Encoding.UTF8;
 
-            string s = sourceFileName;
-            string t = targetFileName;
+            string source = sourceFileName;
+            string target = targetFileName;
 
             bool justResult = false;
 
             if (args != null && args.Length == 2)
             {
                 // parameters -> source target
-                s = args[0];
-                t = args[1];
+                source = args[0];
+                target = args[1];
                 justResult = true;
             }
 
             XDocument xml = null;
-            if (LoadXml(ref xml, s))
+            if (LoadXml(ref xml, source))
             {
-                if (WriteJson(xml, t))
+                if (WriteJson(xml, target))
                 {
                     if (!justResult)
                     {
-                        Logger.Log(TextHolder.T.Success, t);
+                        Logger.Log(t.Success, target);
                     }
                 }
             }
         }
+
+        private static readonly THolder t = THolder.T;
+
         private static bool LoadXml(ref XDocument output, string source)
         {
-
             if (!File.Exists(source))
             {
-                Logger.Log(TextHolder.T.FileNotExist, source);
+                Logger.Log(t.FileNotExist, source);
                 return false;
             }
 
@@ -73,25 +75,25 @@ namespace HomeworkConsole
             }
             catch (UriFormatException uriEx)
             {
-                Logger.Log(TextHolder.T.UriFormatNotCorrect, source);
-                Logger.Log(TextHolder.T.Exception, uriEx.Message);
+                Logger.Log(t.UriFormatNotCorrect, source);
+                Logger.Log(t.Exception, uriEx.Message);
                 return false;
             }
             catch (SecurityException securityEx)
             {
-                Logger.Log(TextHolder.T.SecurityException, source);
-                Logger.Log(TextHolder.T.Exception, securityEx.Message);
+                Logger.Log(t.SecurityException, source);
+                Logger.Log(t.Exception, securityEx.Message);
                 return false;
             }
             catch (Exception ex)
             {
-                Logger.Log(TextHolder.T.Exception, ex.Message);
+                Logger.Log(t.Exception, ex.Message);
                 return false;
             }
 
             if (text == null)
             {
-                Logger.Log(TextHolder.T.FileEmpty, source);
+                Logger.Log(t.FileEmpty, source);
                 return false;
             }
 
@@ -104,7 +106,7 @@ namespace HomeworkConsole
             XElement titleEl = xdoc.Root.Element(tag);
             if (titleEl == null)
             {
-                Logger.Log(TextHolder.T.NoTagInXml, tag);
+                Logger.Log(THolder.T.NoTagInXml, tag);
                 return false;
             }
             return true;
@@ -119,13 +121,13 @@ namespace HomeworkConsole
             catch (XmlException xmlEx)
             {
                 // file can have extension .xml but another content (NOT valid XML)
-                Logger.Log(TextHolder.T.NotValidXml);
-                Logger.Log(TextHolder.T.Exception, xmlEx.Message);
+                Logger.Log(THolder.T.NotValidXml);
+                Logger.Log(THolder.T.Exception, xmlEx.Message);
                 return false;
             }
             catch (Exception ex)
             {
-                Logger.Log(TextHolder.T.Exception, ex.Message);
+                Logger.Log(THolder.T.Exception, ex.Message);
                 return false;
             }
 
@@ -151,8 +153,8 @@ namespace HomeworkConsole
             }
             catch (IOException ioEx)
             {
-                Logger.Log(TextHolder.T.IOException, target);
-                Logger.Log(TextHolder.T.Exception, ioEx.Message);
+                Logger.Log(THolder.T.IOException, target);
+                Logger.Log(THolder.T.Exception, ioEx.Message);
             }
 
             return false;

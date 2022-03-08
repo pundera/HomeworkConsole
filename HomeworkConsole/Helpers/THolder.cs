@@ -7,35 +7,33 @@ using System.Text;
 
 namespace HomeworkConsole.Helpers
 {
-    public sealed class TextHolder
+    public sealed class THolder
     {
-        private static readonly TextHolder instance = new TextHolder();
+        private static readonly THolder instance = new();
 
         // Explicit static constructor to tell C# compiler
         // not to mark type as beforefieldinit
-        static TextHolder()
+        static THolder()
         {
         }
 
-        public static TextHolder T
+        public static THolder T
         {
             get
             {
-                return instance.LoadResources();
+                return LoadResources();
             }
         }
 
-        private TextHolder()
+        private THolder()
         {
         }
 
-        private TextHolder LoadResources()
-        {            
-            Assembly ass = Assembly.GetAssembly(new Program().GetType());
-            using Stream stream = ass.GetManifestResourceStream("HomeworkConsole.AppResources.ExceptionStrings.json");
-            using StreamReader reader = new StreamReader(stream);
-            string result = reader.ReadToEnd();
-            TextHolder t = JsonConvert.DeserializeObject<TextHolder>(result);
+        private static THolder LoadResources()
+        {
+            string dir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+            string json = File.ReadAllText(@$"{dir}\AppResources\ExceptionStrings.json");
+            THolder t = JsonConvert.DeserializeObject<THolder>(json);
 
             return t;
         }
