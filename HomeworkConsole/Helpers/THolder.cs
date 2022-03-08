@@ -38,14 +38,23 @@ namespace HomeworkConsole.Helpers
             return t;
         }
 
+        [JsonRequired]
         public string FileNotExist { get; set; }
+        [JsonRequired]
         public string UriFormatNotCorrect { get; set; }
+        [JsonRequired]
         public string Exception { get; set; }
+        [JsonRequired]
         public string SecurityException { get; set; }
+        [JsonRequired]
         public string FileEmpty { get; set; }
+        [JsonRequired]
         public string NotValidXml { get; set; }
+        [JsonRequired]
         public string Success { get; set; }
+        [JsonRequired]
         public string IOException { get; set; }
+        [JsonRequired]
         public string NoTagInXml { get; set; }
 
     }
